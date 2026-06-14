@@ -71,5 +71,114 @@
   }
   body {
     @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
+}
+
+/* Light theme overrides */
+.light {
+  --background: 228 33% 97%;
+  --foreground: 240 56% 5%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 56% 5%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 56% 5%;
+  --primary: 240 56% 5%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 228 20% 94%;
+  --secondary-foreground: 240 56% 5%;
+  --muted: 228 20% 94%;
+  --muted-foreground: 220 9% 46%;
+  --accent: 228 20% 94%;
+  --accent-foreground: 240 56% 5%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 220 13% 88%;
+  --input: 220 13% 88%;
+  --ring: 240 56% 5%;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 220 9% 46%;
+  --sidebar-primary: 240 56% 5%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 228 20% 94%;
+  --sidebar-accent-foreground: 240 56% 5%;
+  --sidebar-border: 220 13% 88%;
+  --sidebar-ring: 240 56% 5%;
+}
+
+/* Matrix theme */
+.matrix {
+  --background: 0 0% 0%;
+  --foreground: 120 100% 50%;
+  --card: 0 0% 5%;
+  --card-foreground: 120 100% 50%;
+  --popover: 0 0% 5%;
+  --popover-foreground: 120 100% 50%;
+  --primary: 120 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 120 100% 10%;
+  --secondary-foreground: 120 100% 50%;
+  --muted: 120 100% 10%;
+  --muted-foreground: 120 60% 40%;
+  --accent: 120 100% 15%;
+  --accent-foreground: 120 100% 50%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 120 100% 20%;
+  --input: 120 100% 20%;
+  --ring: 120 100% 50%;
+  --sidebar-background: 0 0% 3%;
+  --sidebar-foreground: 120 80% 45%;
+  --sidebar-primary: 120 100% 50%;
+  --sidebar-primary-foreground: 0 0% 0%;
+  --sidebar-accent: 120 100% 10%;
+  --sidebar-accent-foreground: 120 100% 50%;
+  --sidebar-border: 120 100% 20%;
+  --sidebar-ring: 120 100% 50%;
+}
+
+/* Rainbow theme */
+.rainbow {
+  --background: 240 56% 5%;
+  --foreground: 0 0% 98%;
+  --card: 240 56% 8%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 56% 8%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 56% 5%;
+  --secondary: 240 30% 15%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 30% 15%;
+  --muted-foreground: 240 5% 65%;
+  --accent: 240 30% 15%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 20% 20%;
+  --input: 240 20% 20%;
+  --ring: 320 100% 60%;
+  --sidebar-background: 240 56% 8%;
+  --sidebar-foreground: 240 5% 65%;
+  --sidebar-primary: 320 100% 60%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 30% 15%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 20% 20%;
+  --sidebar-ring: 320 100% 60%;
+}
+
+/* Rainbow animated gradient text */
+.rainbow .rainbow-text {
+  background: linear-gradient(90deg, #00D4FF, #9D4EDD, #FF006E, #E8913A, #00D4FF);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow-shift 3s linear infinite;
+}
+
+@keyframes rainbow-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
