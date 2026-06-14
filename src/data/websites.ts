@@ -7,77 +7,47 @@ export interface Website {
   tags: string[];
   categories: string[];
   accentColor: string;
-  createdAt?: string;
-  stats?: {
-    loadTime: string;
-    designScore: number;
-    features: string[];
-  };
 }
 
 export const websites: Website[] = [
   {
-    id: 'piikacsu-games',
-    name: "Piikacsu's Games",
-    description: 'A collection of fun browser-based games including puzzles, arcade classics, and original creations.',
-    url: 'https://games.piikacsu.com',
-    previewImage: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop',
-    tags: ['games', 'entertainment', 'browser', 'interactive'],
-    categories: ['Games', 'Entertainment'],
-    accentColor: '#FF006E',
-    createdAt: '2024-01-15',
-    stats: {
-      loadTime: '1.2s',
-      designScore: 8.5,
-      features: ['Multiplayer', 'Leaderboards', 'Achievements', 'Responsive'],
-    },
-  },
-  {
-    id: 'mc-locate',
-    name: 'Mc Locate',
-    description: 'Real-time location tracking and mapping service for Minecraft servers. Find players, bases, and points of interest.',
-    url: 'https://mclocate.app',
-    previewImage: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&h=400&fit=crop',
-    tags: ['minecraft', 'mapping', 'tracking', 'gaming'],
-    categories: ['Gaming', 'Utility'],
+    id: 'neon-shop',
+    name: 'Neon Shop',
+    description: 'A futuristic e-commerce storefront with glowing product cards and real-time inventory.',
+    url: 'https://neon-shop.example.com',
+    previewImage: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=400&h=300&fit=crop',
+    tags: ['e-commerce', 'futuristic', 'neon'],
+    categories: ['Retail', 'Technology'],
     accentColor: '#00D4FF',
-    createdAt: '2024-02-20',
-    stats: {
-      loadTime: '0.8s',
-      designScore: 9.0,
-      features: ['Real-time', '3D Map', 'Server Sync', 'Mobile App'],
-    },
   },
   {
-    id: 'piikacsu-ai',
-    name: 'Piikacsu AI',
-    description: 'AI-powered creative tools for image generation, text analysis, and content creation. Powered by latest ML models.',
-    url: 'https://ai.piikacsu.com',
-    previewImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-    tags: ['ai', 'machine-learning', 'creative', 'productivity'],
-    categories: ['AI', 'Productivity'],
+    id: 'aura-saas',
+    name: 'Aura SaaS',
+    description: 'Minimalist SaaS landing page with gradient hero and feature grid.',
+    url: 'https://aura-saas.example.com',
+    previewImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
+    tags: ['saas', 'minimal', 'gradient'],
+    categories: ['Business', 'Software'],
     accentColor: '#9D4EDD',
-    createdAt: '2024-03-10',
-    stats: {
-      loadTime: '1.5s',
-      designScore: 9.2,
-      features: ['Image Gen', 'Text Analysis', 'API Access', 'Custom Models'],
-    },
   },
   {
-    id: 'abenerp',
-    name: 'ABENERP',
-    description: 'Enterprise resource planning solution for small to medium businesses. Streamline operations, inventory, and HR.',
-    url: 'https://abenerp.com',
-    previewImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-    tags: ['erp', 'business', 'management', 'enterprise'],
-    categories: ['Business', 'Enterprise'],
+    id: 'pulse-blog',
+    name: 'Pulse Blog',
+    description: 'Modern editorial platform with typography-focused design and reading modes.',
+    url: 'https://pulse-blog.example.com',
+    previewImage: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&h=300&fit=crop',
+    tags: ['blog', 'editorial', 'minimal'],
+    categories: ['Publishing', 'Media'],
+    accentColor: '#FF006E',
+  },
+  {
+    id: 'zenith-portfolio',
+    name: 'Zenith Portfolio',
+    description: 'Creative portfolio with scroll-driven animations and project showcases.',
+    url: 'https://zenith-portfolio.example.com',
+    previewImage: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop',
+    tags: ['portfolio', 'creative', 'animation'],
+    categories: ['Creative', 'Design'],
     accentColor: '#E8913A',
-    createdAt: '2024-04-05',
-    stats: {
-      loadTime: '1.1s',
-      designScore: 8.8,
-      features: ['Inventory', 'HR Module', 'Analytics', 'Cloud Sync'],
-    },
   },
 ];
