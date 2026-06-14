@@ -1,6 +1,11 @@
 import { Routes, Route, useLocation } from 'react-router'
 import { AnimatePresence } from 'framer-motion'
 import Home from './pages/Home'
+import Showcase from './pages/Showcase'
+import Comments from './pages/Comments'
+import Create from './pages/Create'
+import Leaderboard from './pages/Leaderboard'
+import Insights from './pages/Insights'
 import { ThemeProvider } from './context/ThemeContext'
 import { ToastProvider } from './context/ToastContext'
 import { ScrollProgress } from './components/ScrollProgress'
@@ -27,6 +32,11 @@ export default function App() {
             <PageTransition key={location.pathname}>
               <Routes location={location}>
                 <Route path="/" element={<Home />} />
+                <Route path="/showcase" element={<Showcase />} />
+                <Route path="/comments" element={<Comments />} />
+                <Route path="/create" element={<Create />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/insights" element={<Insights />} />
               </Routes>
             </PageTransition>
           </AnimatePresence>

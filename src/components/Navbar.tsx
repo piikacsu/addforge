@@ -57,11 +57,18 @@ export function Navbar() {
           </a>
 
           {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-8">
-            {['Home', 'Gallery', 'Analytics', 'Upload'].map((item) => (
+          <div className="hidden md:flex items-center gap-6">
+            {[
+              { to: '/', label: 'Home' },
+              { to: '/showcase', label: 'Showcase' },
+              { to: '/create', label: 'Create' },
+              { to: '/comments', label: 'Comments' },
+              { to: '/leaderboard', label: 'Leaderboard' },
+              { to: '/insights', label: 'Insights' },
+            ].map((item) => (
               <a
-                key={item}
-                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                key={item.to}
+                href={item.to}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   theme === 'light'
                     ? 'text-[#6B7280] hover:text-[#0A0A12]'
@@ -70,7 +77,7 @@ export function Navbar() {
                     : 'text-white/60 hover:text-white'
                 }`}
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>
@@ -145,10 +152,17 @@ export function Navbar() {
             }`}
           >
             <div className="px-4 py-3 space-y-1">
-              {['Home', 'Gallery', 'Analytics', 'Upload'].map((item) => (
+              {[
+                { to: '/', label: 'Home' },
+                { to: '/showcase', label: 'Showcase' },
+                { to: '/create', label: 'Create' },
+                { to: '/comments', label: 'Comments' },
+                { to: '/leaderboard', label: 'Leaderboard' },
+                { to: '/insights', label: 'Insights' },
+              ].map((item) => (
                 <a
-                  key={item}
-                  href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                  key={item.to}
+                  href={item.to}
                   onClick={() => setMobileOpen(false)}
                   className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     theme === 'light'
@@ -156,7 +170,7 @@ export function Navbar() {
                       : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
             </div>
