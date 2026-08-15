@@ -5,6 +5,7 @@ import { websites } from '../data/websites';
 import { useLikes } from '../hooks/useLikes';
 import { useComments } from '../hooks/useComments';
 import { useRatings } from '../hooks/useRatings';
+import { useClicks } from '../hooks/useClicks';
 
 const ACCENT_COLORS = ['#00D4FF', '#9D4EDD', '#FF006E', '#E8913A', '#00FF88', '#FFD700'];
 
@@ -12,34 +13,21 @@ export default function Insights() {
   const { getLikeCount } = useLikes();
   const { getTotalComments, getTopCommenters, getRecentActivity, getAverageRating } = useComments();
   const { getAverageRating: getRatingScore } = useRatings();
+  const { getTotalClicks, getClickCount } = useClicks();
 
   const totalLikes = websites.reduce((s, w) => s + getLikeCount(w.id), 0);
   const totalComments = getTotalComments();
   const totalWebsites = websites.length;
+  const totalClicks = getTotalClicks();
 
-  const totalClicks = useMemo(() => {
-    try {
-      const raw = localStorage.getItem('adforge_visits');
-      if (raw) {
-        const visits = JSON.parse(raw);
-        return Object.values(visits).reduce((a: number, b: unknown) => a + (b as number), 0);
-      }
-    } catch { /* ignore */ }
-    return 0;
-  }, []);
-
-  // Simulated clicks per website (merge real visits + likes as proxy)
+  // Clicks per website (real data from clicks hook)
   const clicksPerWebsite = useMemo(() => {
-    return websites.map(w => {
-      try {
-        const raw = localStorage.getItem('adforge_visits');
-        const visits = raw ? JSON.parse(raw) : {};
-        return { name: w.name, value: (visits[w.id] || 0) + getLikeCount(w.id) + getTotalComments(), color: w.accentColor };
-      } catch {
-        return { name: w.name, value: getLikeCount(w.id), color: w.accentColor };
-      }
-    }).sort((a, b) => b.value - a.value);
-  }, [getLikeCount, getTotalComments]);
+    return websites.map(w => ({
+      name: w.name,
+      value: getClickCount(w.id),
+      color: w.accentColor,
+    })).sort((a, b) => b.value - a.value);
+  }, [getClickCount]);
 
   const maxClicks = Math.max(...clicksPerWebsite.map(c => c.value), 1);
 

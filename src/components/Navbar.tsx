@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Sparkles, Code2, Menu, X } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
@@ -17,16 +18,20 @@ const themeIcons: Record<string, React.ReactNode> = {
   rainbow: <Sparkles className="w-4 h-4" />,
 };
 
-export function Navbar() {
-  const { theme, toggleTheme, unlockMatrix, unlockRainbow } = useTheme();
-  const [mobileOpen, setMobileOpen] = useState(false);
+const navLinks = [
+  { to: '/', label: 'Home' },
+  { to: '/showcase', label: 'Showcase' },
+  { to: '/create', label: 'Create' },
+  { to: '/comments', label: 'Comments' },
+  { to: '/leaderboard', label: 'Leaderboard' },
+  { to: '/insights', label: 'Insights' },
+  { to: '/install', label: 'Install App' },
+];
 
-  const availableThemes = [
-    'dark',
-    'light',
-    ...(unlockMatrix ? ['matrix'] : []),
-    ...(unlockRainbow ? ['rainbow'] : []),
-  ] as const;
+export function Navbar() {
+  const { theme, toggleTheme } = useTheme();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <nav
@@ -43,43 +48,60 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#00D4FF] to-[#9D4EDD]">
-              <span className="text-white font-bold text-sm font-['Space_Grotesk']">A</span>
+          <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+            <div className="relative w-9 h-9 group-hover:scale-105 transition-transform duration-300">
+              <img
+                src="/icon-512x512.png"
+                alt="AdForge"
+                className="w-9 h-9 rounded-lg object-cover shadow-lg"
+              />
             </div>
-            <span
-              className={`text-lg font-bold font-['Space_Grotesk'] transition-colors duration-300 ${
-                theme === 'light' ? 'text-[#0A0A12]' : 'text-white'
-              }`}
-            >
-              AdForge
-            </span>
-          </a>
+            <div className="flex flex-col leading-none">
+              <span className={`text-[20px] font-bold font-['Space_Grotesk'] tracking-tight transition-all duration-300 ${
+                theme === 'light' ? 'text-[#0A0A12]' : 'bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent'
+              }`}>
+                AdForge
+              </span>
+              <span className="text-[8px] font-semibold uppercase tracking-[0.25em] text-cyan-400/70 -mt-0.5">
+                Ad Builder
+              </span>
+            </div>
+          </Link>
 
           {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-6">
-            {[
-              { to: '/', label: 'Home' },
-              { to: '/showcase', label: 'Showcase' },
-              { to: '/create', label: 'Create' },
-              { to: '/comments', label: 'Comments' },
-              { to: '/leaderboard', label: 'Leaderboard' },
-              { to: '/insights', label: 'Insights' },
-            ].map((item) => (
-              <a
-                key={item.to}
-                href={item.to}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  theme === 'light'
-                    ? 'text-[#6B7280] hover:text-[#0A0A12]'
-                    : theme === 'matrix'
-                    ? 'text-green-400/70 hover:text-green-400'
-                    : 'text-white/60 hover:text-white'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navLinks.map((item) => {
+              const isActive = location.pathname === item.to;
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`relative text-sm font-medium transition-colors duration-200 ${
+                    isActive
+                      ? theme === 'light'
+                        ? 'text-[#0A0A12]'
+                        : theme === 'matrix'
+                        ? 'text-green-400'
+                        : 'text-white'
+                      : theme === 'light'
+                      ? 'text-[#6B7280] hover:text-[#0A0A12]'
+                      : theme === 'matrix'
+                      ? 'text-green-400/70 hover:text-green-400'
+                      : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${
+                        theme === 'matrix' ? 'bg-green-400' : 'bg-cyan-400'
+                      }`}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right side: Theme toggle + mobile menu */}
@@ -110,16 +132,8 @@ export function Navbar() {
                     <span className="hidden sm:inline">{themeLabels[theme]}</span>
                   </motion.span>
                 </AnimatePresence>
-                {/* Small dot indicator for available extra themes */}
-                {(unlockMatrix || unlockRainbow) && (
-                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-gradient-to-r from-[#00D4FF] to-[#FF006E]" />
-                )}
-              </motion.button>
 
-              {/* Theme picker dropdown (shows on hover/focus for direct selection) */}
-              {availableThemes.length > 2 && (
-                <div className="absolute right-0 top-full mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200" />
-              )}
+              </motion.button>
             </div>
 
             {/* Mobile menu toggle */}
@@ -144,34 +158,30 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`md:hidden overflow-hidden border-t ${
+            className={`md:hidden border-t ${
               theme === 'light'
-                ? 'bg-white/90 border-gray-200/60 backdrop-blur-xl'
-                : 'bg-[#0A0A12]/90 border-white/10 backdrop-blur-xl'
+                ? 'bg-white/80 border-gray-200/60 backdrop-blur-xl'
+                : 'bg-[#0A0A12]/80 border-white/10 backdrop-blur-xl'
             }`}
           >
-            <div className="px-4 py-3 space-y-1">
-              {[
-                { to: '/', label: 'Home' },
-                { to: '/showcase', label: 'Showcase' },
-                { to: '/create', label: 'Create' },
-                { to: '/comments', label: 'Comments' },
-                { to: '/leaderboard', label: 'Leaderboard' },
-                { to: '/insights', label: 'Insights' },
-              ].map((item) => (
-                <a
+            <div className="px-4 py-4 space-y-2">
+              {navLinks.map((item) => (
+                <Link
                   key={item.to}
-                  href={item.to}
+                  to={item.to}
                   onClick={() => setMobileOpen(false)}
-                  className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                    theme === 'light'
-                      ? 'text-[#6B7280] hover:text-[#0A0A12] hover:bg-gray-100'
-                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                  className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    location.pathname === item.to
+                      ? theme === 'light'
+                        ? 'bg-gray-100 text-[#0A0A12]'
+                        : 'bg-white/10 text-white'
+                      : theme === 'light'
+                      ? 'text-[#6B7280] hover:bg-gray-50'
+                      : 'text-white/60 hover:bg-white/5'
                   }`}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>

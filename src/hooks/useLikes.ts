@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
-const STORAGE_KEY = 'adforge_likes';
+const STORAGE_KEY = 'adforge_likes_v3';
 
 interface LikesData {
   [websiteId: string]: number;
@@ -10,12 +10,27 @@ interface UserLikes {
   [websiteId: string]: boolean;
 }
 
+const SEED_LIKES: LikesData = {
+  // Ranked: Piikacsu's Games #1, ABENERP #2, Flappy 3D #3, Black Hole Explorer #4, Mc Locate #5, OLYMPUS #6, Emoji Kitchen #7, NIGHTLINES #8, Piikacsu AI #9
+  'piikacsu-games': 147,
+  'abenerp': 98,
+  'flappy-3d': 89,
+  'hskaozbhw4liw': 85,
+  'mc-locate': 76,
+  'olympus': 67,
+  'emoji-kitchen': 63,
+  'nightlines': 54,
+  'piikacsu-ai': 52,
+};
+
 function getLikesData(): LikesData {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
   } catch { /* ignore */ }
-  return {};
+  // First visit: seed with pre-populated likes
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_LIKES));
+  return SEED_LIKES;
 }
 
 function getUserLikes(): UserLikes {
