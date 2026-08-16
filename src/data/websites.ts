@@ -153,7 +153,7 @@ export const websites: Website[] = [
     tags: ['TRAVEL', 'NIGHT', 'ATLAS'],
     categories: ['Travel', 'Lifestyle'],
     accentColor: '#6366F1',
-    createdAt: '2024-07-15',
+    createdAt: "2024-07-16",
     stats: {
       loadTime: '1.1s',
       designScore: 9.3,
